@@ -3,6 +3,9 @@
     var React = global._import('React').from(app.modules);
 
     var component = React.createClass({
+        propTypes: {
+          onClick: React.PropTypes.func.isRequired,
+        },
         render: function() {
             var self = this;
 
@@ -15,6 +18,7 @@
         onClick: function(proxyEvent, originalEvent) {
             var self = this;
             proxyEvent.preventDefault();
+            self.props.onClick();
         }
     });
 

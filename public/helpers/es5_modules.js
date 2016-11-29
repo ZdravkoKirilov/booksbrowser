@@ -3,7 +3,13 @@
     global._import = function(module) {
         return {
             from: function(source) {
-                return source[module];
+                var instance = source[module];
+                if (instance) {
+                  return instance;
+                } else {
+                  throw new Error('Required module was not found. Name: ' + module);
+                }
+
             }
         }
     }

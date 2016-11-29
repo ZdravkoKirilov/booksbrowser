@@ -17,11 +17,15 @@
             'root_component': null,
             'book_component': null,
             'loadmore_component': null,
+            'sorting_component': null,
+            'filter_component': null,
+            'author_checkbox_component': null,
             // components end
 
-            // api start
+            // helpers start
             'REST_Handler': null,
-            // api end
+            'Randomizer': null,
+            // helpers end
 
         },
         settings: {
