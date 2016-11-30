@@ -1,3 +1,4 @@
+// represents the button at the bottom of the list which loads more authors
 (function(global, app) {
 
     var React = global._import('React').from(app.modules);

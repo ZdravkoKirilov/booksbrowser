@@ -30,7 +30,11 @@
 
         },
         settings: {
-            googleBooksAPI: "https://www.googleapis.com/books/v1/volumes?q="
+            googleBooksAPI: "https://www.googleapis.com/books/v1/volumes?q=",
+            sortingCriteria: {
+              title: 'title',
+              author: 'author',
+            }
         },
     };
 

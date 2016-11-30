@@ -1,3 +1,5 @@
+// represents a book record in the list
+
 (function(global, app) {
 
     var React = global._import('React').from(app.modules);

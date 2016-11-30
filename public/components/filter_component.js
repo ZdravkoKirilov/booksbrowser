@@ -1,3 +1,5 @@
+// holds a set of checkboxes with Author names, which can filter the books in the list upon check/uncheck
+
 (function(global, app) {
 
     var React = global._import('React').from(app.modules);

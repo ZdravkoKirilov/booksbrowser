@@ -1,3 +1,5 @@
+// root component and the de facto state container of the application, controlling the data flow and distributing the data among children down the component tree
+
 (function(global, app) {
 
     var React = global._import('React').from(app.modules);
@@ -14,7 +16,7 @@
         getInitialState: function() {
             return {
                 books: [],
-                sortingCriteria: 'title',
+                sortingCriteria: app.settings.sortingCriteria.title,
                 currentFilters: [],
                 unique_authors: {},
                 isLoading: false,
@@ -24,7 +26,9 @@
         render: function() {
             var self = this;
 
-            var filteredBooks = self.filterBooks(self.state.books);
+            var filteredBooks = self.filterBooks(self.state.books).map(function(props) {
+                return React.createElement(book_component, props);
+            });
 
             return React.createElement(
                 'div', {
@@ -32,6 +36,7 @@
                 },
                 React.createElement(sorting_component, {
                     onClick: self.onSortBooksClicked,
+                    sortingCriteria: self.state.sortingCriteria,
                 }),
                 React.createElement(filter_component, {
                     onChange: self.onFilterBooksClicked,
@@ -49,7 +54,6 @@
         },
         componentDidMount: function() {
             var self = this;
-
             self.requestBooks();
         },
         requestBooks: function(options) {
@@ -70,7 +74,7 @@
                         var author = elem.volumeInfo.authors[0];
                         authors[author] = lodash[author] || author;
 
-                        return React.createElement(book_component, {
+                        return {
                             key: elem.id + global.Date.now(),
                             title: elem.volumeInfo.title,
                             author: author,
@@ -78,7 +82,8 @@
                             onBookClicked: self.onBookClicked,
                             link: elem.volumeInfo.previewLink,
                             genre: categories.join(';'),
-                        });
+                        }
+
                     });
                     var currentBooks = self.state.books;
                     var totalBooks = currentBooks.concat(books);
@@ -128,7 +133,7 @@
         sortBooks: function(books, sortingCriteria) {
             var self = this;
             var sortedBooks = lodash.sortBy(books, function(elem) {
-                return elem.props[sortingCriteria];
+                return elem[sortingCriteria];
             });
             return sortedBooks;
         },
@@ -139,7 +144,7 @@
 
             if (filters.length) {
                 var result = books.slice().filter(function(elem) {
-                    return lodash.includes(filters, elem.props.author);
+                    return lodash.includes(filters, elem.author);
                 });
             } else {
                 result = books;

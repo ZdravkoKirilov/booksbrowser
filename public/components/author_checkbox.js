@@ -1,3 +1,5 @@
+// represents a checkbox for filtering books in the list according to the author
+
 (function(global, app) {
 
     var React = global._import('React').from(app.modules);

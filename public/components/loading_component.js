@@ -1,3 +1,4 @@
+// a spinning loader which is shown while fethcing data + Error text when the request fails
 (function(global, app) {
 
     var React = global._import('React').from(app.modules);
