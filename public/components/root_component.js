@@ -6,6 +6,7 @@
     var loadmore_component = global._import('loadmore_component').from(app.modules);
     var sorting_component = global._import('sorting_component').from(app.modules);
     var filter_component = global._import('filter_component').from(app.modules);
+    var loading_component = global._import('loading_component').from(app.modules);
     var randomizer = global._import('Randomizer').from(app.modules);
     var lodash = global._import('Lodash').from(app.modules);
 
@@ -16,6 +17,8 @@
                 sortingCriteria: 'title',
                 currentFilters: [],
                 unique_authors: {},
+                isLoading: false,
+                last_fetch_succeeded: true,
             }
         },
         render: function() {
@@ -37,6 +40,10 @@
                 filteredBooks,
                 React.createElement(loadmore_component, {
                     onClick: self.requestBooks,
+                }),
+                React.createElement(loading_component, {
+                    isLoading: self.state.isLoading,
+                    last_fetch_succeeded: self.state.last_fetch_succeeded,
                 })
             );
         },
@@ -50,6 +57,9 @@
 
             var request = REST_Handler.getBooks({
                 query: randomizer.getRandomAuthor(),
+            });
+            self.setState({
+                isLoading: true,
             });
             var authors = lodash.clone(self.state.unique_authors);
 
@@ -76,18 +86,23 @@
                     self.setState({
                         books: self.sortBooks(totalBooks, self.state.sortingCriteria),
                         unique_authors: authors,
+                        isLoading: false,
+                        last_fetch_succeeded: true,
                     });
                 })
                 .catch(function(error) {
-                    debugger;
+                    self.setState({
+                        isLoading: false,
+                        last_fetch_succeeded: false,
+                    });
                 });
         },
-        onBookClicked: function(eventProxy, event, child) {
+        onBookClicked: function(child) {
             child.setState({
                 opened: !child.state.opened,
             });
         },
-        onSortBooksClicked: function(proxyEvent, originalEvent, sortingCriteria) {
+        onSortBooksClicked: function(sortingCriteria) {
             var self = this;
             var sortedBooks = self.sortBooks(self.state.books, sortingCriteria);
             this.setState({

@@ -24,7 +24,7 @@
 
 
         },
-        onChange: function(event, proxy, elem) {
+        onChange: function(proxy, event, elem) {
             var self = this;
             self.props.onChange(self.props.author_name);
         },

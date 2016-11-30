@@ -20,6 +20,7 @@
             'sorting_component': null,
             'filter_component': null,
             'author_checkbox_component': null,
+            'loading_component': null,
             // components end
 
             // helpers start

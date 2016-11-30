@@ -26,15 +26,15 @@
             );
 
         },
-        onBookNameSort: function(proxyEvent, originalEvent) {
+        onBookNameSort: function(proxy, event) {
             var self = this;
-            proxyEvent.preventDefault();
-            self.props.onClick(proxyEvent, originalEvent, 'title');
+            event.preventDefault();
+            self.props.onClick('title');
         },
-        onAuthorNameSort: function(proxyEvent, originalEvent) {
+        onAuthorNameSort: function(proxy, event) {
             var self = this;
-            proxyEvent.preventDefault();
-            self.props.onClick(proxyEvent, originalEvent, 'author');
+            event.preventDefault();
+            self.props.onClick('author');
         },
     });
 

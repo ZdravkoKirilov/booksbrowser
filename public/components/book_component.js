@@ -11,8 +11,8 @@
         propTypes: {
             title: React.PropTypes.string.isRequired,
             author: React.PropTypes.string.isRequired,
-            publishDate: React.PropTypes.string.isRequired,
-            genre: React.PropTypes.string.isRequired,
+            publishDate: React.PropTypes.string,
+            genre: React.PropTypes.string,
             link: React.PropTypes.string.isRequired,
             onBookClicked: React.PropTypes.func.isRequired,
         },
@@ -47,10 +47,10 @@
                 )
             );
         },
-        onClick: function(proxyEvent, originalEvent) {
+        onClick: function(proxy, event) {
             var self = this;
-            proxyEvent.preventDefault();
-            self.props.onBookClicked(proxyEvent, originalEvent, self);
+            event.preventDefault();
+            self.props.onBookClicked(self);
         },
         onBookLinkClicked: function(event) {
             event.stopPropagation();
