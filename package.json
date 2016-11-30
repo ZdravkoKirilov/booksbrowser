@@ -1,5 +1,5 @@
 {
-    "name": "bigasslist",
+    "name": "booksbrowser",
     "version": "1.0.0",
     "description": "A list displaying a million books",
     "main": "server.js",
@@ -21,7 +21,6 @@
         "express": "^4.14.0",
     },
     "googleBooksAPI": {
-        "key": "AIzaSyBAjQqfKzNUKAtmmr36UBR7zXsxUztX_Lc",
         "endpoint": "https://www.googleapis.com/books/v1/volumes?q="
     }
 }
