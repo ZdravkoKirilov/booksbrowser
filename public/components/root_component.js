@@ -71,13 +71,12 @@
                 isLoading: true,
             });
             var authors = lodash.clone(self.state.unique_authors);
-
             request
                 .then(function(response) {
                     var fetched_books = response.data.items.map(function(elem) {
                         var categories = elem.volumeInfo.categories || [];
                         var author = elem.volumeInfo.authors[0];
-                        authors[author] = authors[author] || author;
+                        authors = self.addAuthor(authors, author);
 
                         return {
                             key: elem.id + global.Date.now(),
@@ -117,6 +116,11 @@
                 sortingCriteria: sortingCriteria,
                 books: sortedBooks,
             });
+        },
+        addAuthor: function(unique_authors, author) { // authors reducer
+            var authors = lodash.clone(unique_authors);
+            authors[author] = authors[author] || author;
+            return authors;
         },
         addBooks: function(current, additional) { // reducer for adding books
             return current.concat(additional);
