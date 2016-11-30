@@ -13,7 +13,7 @@
     var lodash = global._import('Lodash').from(app.modules);
 
     var component = React.createClass({
-        getInitialState: function() {
+        getInitialState: function() { // could be an initial state to a Redux store
             return {
                 books: [],
                 sortingCriteria: app.settings.sortingCriteria.title,
@@ -27,7 +27,9 @@
             var self = this;
 
             var filteredBooks = self.filterBooks(self.state.books).map(function(props) {
-                return React.createElement(book_component, props);
+                var props_clone = lodash.clone(props); // keeping the original books data serializable by not adding any functions to it
+                props_clone.onBookClicked = self.onBookClicked;
+                return React.createElement(book_component, props_clone);
             });
 
             return React.createElement(
@@ -56,6 +58,9 @@
             var self = this;
             self.requestBooks();
         },
+        componentDidUpdate: function() { // debugging purposes
+            console.dir(this);
+        },
         requestBooks: function(options) {
             var self = this;
 
@@ -69,24 +74,22 @@
 
             request
                 .then(function(response) {
-                    var books = response.data.items.map(function(elem) {
+                    var fetched_books = response.data.items.map(function(elem) {
                         var categories = elem.volumeInfo.categories || [];
                         var author = elem.volumeInfo.authors[0];
-                        authors[author] = lodash[author] || author;
+                        authors[author] = authors[author] || author;
 
                         return {
                             key: elem.id + global.Date.now(),
                             title: elem.volumeInfo.title,
                             author: author,
                             publishDate: elem.volumeInfo.publishedDate,
-                            onBookClicked: self.onBookClicked,
                             link: elem.volumeInfo.previewLink,
                             genre: categories.join(';'),
                         }
 
                     });
-                    var currentBooks = self.state.books;
-                    var totalBooks = currentBooks.concat(books);
+                    var totalBooks = self.addBooks(self.state.books, fetched_books);
 
                     self.setState({
                         books: self.sortBooks(totalBooks, self.state.sortingCriteria),
@@ -115,7 +118,10 @@
                 books: sortedBooks,
             });
         },
-        onFilterBooksClicked: function(author) {
+        addBooks: function(current, additional) { // reducer for adding books
+            return current.concat(additional);
+        },
+        onFilterBooksClicked: function(author) { //reducer for filters
             var self = this;
             var result = [];
             if (lodash.includes(self.state.currentFilters, author)) {
@@ -130,14 +136,14 @@
                 currentFilters: result,
             });
         },
-        sortBooks: function(books, sortingCriteria) {
+        sortBooks: function(books, sortingCriteria) { // reducer for book sorting
             var self = this;
             var sortedBooks = lodash.sortBy(books, function(elem) {
                 return elem[sortingCriteria];
             });
             return sortedBooks;
         },
-        filterBooks: function(books) {
+        filterBooks: function(books) { // reducer for book filtering
             var self = this;
             var filters = self.state.currentFilters;
             var result = [];
