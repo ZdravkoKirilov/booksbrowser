@@ -15,6 +15,8 @@ Sorting of the records is only ascending for now and the user can choose between
 
 Basic filtering is also available and it can match a set of selected authors from a checkbox
 
+Clicking on a book title expands/shrinks the elements. Purchase link, genre, publish date can be seen.
+
 
 Installing. Prerequisites: NodeJS, Git
 --------------------------------------
