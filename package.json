@@ -18,7 +18,7 @@
         "nodemon": "^1.11.0"
     },
     "dependencies": {
-        "express": "^4.14.0",
+        "express": "^4.14.0"
     },
     "googleBooksAPI": {
         "endpoint": "https://www.googleapis.com/books/v1/volumes?q="

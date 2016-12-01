@@ -26,7 +26,7 @@
         render: function() {
             var self = this;
 
-            var filteredBooks = self.filterBooks(self.state.books).map(function(props) {
+            var filteredBooks = self.filterBooks(self.state.books, self.state.currentFilters).map(function(props) {
                 var props_clone = lodash.clone(props); // keeping the original books data serializable by not adding any functions to it
                 props_clone.onBookClicked = self.onBookClicked;
                 return React.createElement(book_component, props_clone);
@@ -127,9 +127,10 @@
         },
         onFilterBooksClicked: function(author) { //reducer for filters
             var self = this;
+            var currentFilters = self.state.currentFilters.slice();
             var result = [];
-            if (lodash.includes(self.state.currentFilters, author)) {
-                result = self.state.currentFilters.filter(function(elem) {
+            if (lodash.includes(currentFilters, author)) {
+                result = currentFilters.filter(function(elem) {
                     return elem !== author;
                 });
             } else {
@@ -147,9 +148,9 @@
             });
             return sortedBooks;
         },
-        filterBooks: function(books) { // reducer for book filtering
+        filterBooks: function(books, currentFilters) { // reducer for book filtering
             var self = this;
-            var filters = self.state.currentFilters;
+            var filters = currentFilters;
             var result = [];
 
             if (filters.length) {

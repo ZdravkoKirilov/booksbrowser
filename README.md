@@ -1,5 +1,6 @@
 "# booksbrowser"
 Overview
+---------
 
 A sample Express/React application fetching book records from Google's Books API
 
@@ -16,7 +17,7 @@ Basic filtering is also available and it can match a set of selected authors fro
 
 
 Installing. Prerequisites: NodeJS, Git
-
+--------------------------------------
 
 The project can be downloaded locally via command line: git clone https://github.com/ZdravkoKirilov/booksbrowser.git
 
@@ -28,7 +29,7 @@ Navigate to localhost:3000 in a browser and the project will be running
 
 
 Technical Details
-
+-----------------
 
 No transpilers are being used: Javascript code is written entirely in ES5, React is used without JSX
 
