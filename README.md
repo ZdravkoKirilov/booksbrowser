@@ -44,4 +44,4 @@ Axios library is used for the AJAX requests, Lodash is used as an utility librar
 
 TO DO
 ------
-Mocha + Chai testing
+Mocha + Chai + React-with-addons testing

@@ -15,7 +15,9 @@
   "author": "Zdravko Kirilov",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "enzyme": "^2.6.0",
+    "nodemon": "^1.11.0",
+    "react": "^15.4.1"
   },
   "dependencies": {
     "express": "^4.14.0"
