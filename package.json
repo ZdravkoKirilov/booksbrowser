@@ -1,26 +1,26 @@
 {
-    "name": "booksbrowser",
-    "version": "1.0.0",
-    "description": "A list displaying a million books",
-    "main": "server.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "react",
-        "list",
-        "books",
-        "axios"
-    ],
-    "author": "Zdravko Kirilov",
-    "license": "ISC",
-    "devDependencies": {
-        "nodemon": "^1.11.0"
-    },
-    "dependencies": {
-        "express": "^4.14.0"
-    },
-    "googleBooksAPI": {
-        "endpoint": "https://www.googleapis.com/books/v1/volumes?q="
-    }
+  "name": "booksbrowser",
+  "version": "1.0.0",
+  "description": "A list displaying a million books",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "list",
+    "books",
+    "axios"
+  ],
+  "author": "Zdravko Kirilov",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "googleBooksAPI": {
+    "endpoint": "https://www.googleapis.com/books/v1/volumes?q="
+  }
 }

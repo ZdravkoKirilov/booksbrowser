@@ -40,3 +40,8 @@ A simple module loader utility is used just as a syntactic sugar aiming to be cl
 There is 1 root component which serves as a state container, handling data changes and passing data as props to children. At this scale using Redux seemed like a bit of an overkill
 
 Axios library is used for the AJAX requests, Lodash is used as an utility library
+
+
+TO DO
+------
+Mocha + Chai testing

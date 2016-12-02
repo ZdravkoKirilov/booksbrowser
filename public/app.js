@@ -10,6 +10,8 @@
             'Lodash': global._,
             'Redux': global.Redux,
             'Axios': global.axios,
+            'Mocha': global.mocha,
+            "Chai": global.chai,
             // 3rd party end
 
 
