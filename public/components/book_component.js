@@ -51,7 +51,7 @@
         },
         onClick: function(proxy, event) {
             var self = this;
-            event.preventDefault();
+            proxy.preventDefault();
             self.props.onBookClicked(self);
         },
         onBookLinkClicked: function(event) {
